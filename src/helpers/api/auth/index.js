@@ -5,7 +5,7 @@ const baseURL = '/auth';
 export const selfMakeSignIn = async (userInfo) => {
   const data = {
     ...userInfo,
-    userType: 'A',
+    account_type: 'A',  // Sign in as admin
   }
   return api.post(`${baseURL}/sign-in`, data);
 };
