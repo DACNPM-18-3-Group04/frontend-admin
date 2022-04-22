@@ -1,5 +1,12 @@
 import { visuallyHidden } from '@mui/utils';
-import { Box, Checkbox, TableRow, TableCell, TableHead, TableSortLabel } from '@mui/material';
+import {
+  Box,
+  Checkbox,
+  TableRow,
+  TableCell,
+  TableHead,
+  TableSortLabel,
+} from '@mui/material';
 
 export default function ListHead({
   order,
@@ -18,14 +25,14 @@ export default function ListHead({
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          {selectAll &&
+        <TableCell padding='checkbox'>
+          {selectAll && (
             <Checkbox
               indeterminate={numSelected > 0 && numSelected < rowCount}
               checked={rowCount > 0 && numSelected === rowCount}
               onChange={onSelectAllClick}
             />
-          }
+          )}
         </TableCell>
         {headLabel.map((headCell) => (
           <TableCell

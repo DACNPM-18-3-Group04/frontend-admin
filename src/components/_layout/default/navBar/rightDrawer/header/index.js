@@ -18,52 +18,52 @@ const SpaceBetween = styled(Box)(({ theme }) => ({
 const AlignCenter = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  padding: theme.spacing(1)
+  padding: theme.spacing(1),
 }));
 
-export default function Header({
-  toggleClose
-}) {
+export default function Header({ toggleClose }) {
   const user = useSelector(selectUser);
   let avatar = null;
   let fullname = null;
 
   if (user.isLogin) {
     fullname = user.fullname;
-    avatar = user.avatar
+    avatar = user.avatar;
   }
 
   return (
     <>
       <SpaceBetween>
-        <IconButton onClick={toggleClose}><ChevronRightIcon/></IconButton>
+        <IconButton onClick={toggleClose}>
+          <ChevronRightIcon />
+        </IconButton>
         <AlignCenter>
           {/* 1 line , clip overflow text */}
-          <Box mr={1} sx={{
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            textOverflow: 'ellipsis',
-            maxWidth: '120px',
-            textAlign: 'right'
-          }}>
+          <Box
+            mr={1}
+            sx={{
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+              textOverflow: 'ellipsis',
+              maxWidth: '120px',
+              textAlign: 'right',
+            }}
+          >
             {fullname}
           </Box>
-          <Avatar
-              alt={fullname}
-              src={avatar}
-          >
+          <Avatar alt={fullname} src={avatar}>
             {/* Fallback to first letter of user's username */}
             {fullname ? fullname.charAt(0) : null}
           </Avatar>
         </AlignCenter>
       </SpaceBetween>
-      <Box sx={{padding: 1}}>
-        {user.isLogin ? 
-          <SignedInUserControlList toggleClose={toggleClose}/>
-          :
-          <SignedOutUserControlList toggleClose={toggleClose}/>
-        }
+      <Box sx={{ padding: 1 }}>
+        {user.isLogin ? (
+          <SignedInUserControlList toggleClose={toggleClose} />
+        ) : (
+          <SignedOutUserControlList toggleClose={toggleClose} />
+        )}
       </Box>
     </>
-  )
+  );
 }

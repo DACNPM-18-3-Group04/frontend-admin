@@ -16,7 +16,7 @@ function App() {
         <FetchSignedInUser>
           <FetchPropertyLocation />
           <BrowserRouter>
-            <Router/>
+            <Router />
           </BrowserRouter>
         </FetchSignedInUser>
       </CustomThemeProvider>

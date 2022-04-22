@@ -9,23 +9,26 @@ import {
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../../../redux/slices/user';
-import { USER_ACCOUNT_STATUS, ACCOUNT_TYPE } from '../../../../helpers/constants';
+import {
+  USER_ACCOUNT_STATUS,
+  ACCOUNT_TYPE,
+} from '../../../../helpers/constants';
 import getLocalDatetimeISOString from '../../../../helpers/utils/getLocalDatetimeISOString';
 
 import MoreMenu from './moreMenu';
 
 export default function UserTableRow({
-  row = {}, 
-  selected = false, 
+  row = {},
+  selected = false,
   handleClick = () => {},
-  handleDelete = () => {}
+  handleDelete = () => {},
 }) {
-  const { 
-    id, 
-    fullname: name, 
-    status, 
-    email: username, 
-    avatar: avatarUrl, 
+  const {
+    id,
+    fullname: name,
+    status,
+    email: username,
+    avatar: avatarUrl,
     account_type: accountType,
     createdAt: created_at,
   } = row;
@@ -67,18 +70,15 @@ export default function UserTableRow({
       </TableCell>
       <TableCell align='left'>{username}</TableCell>
       <TableCell align='left'>
-        <Chip
-          label={statusInfo.text}
-          color={statusInfo.color}
-        />
+        <Chip label={statusInfo.text} color={statusInfo.color} />
       </TableCell>
+      <TableCell align='left'>{ACCOUNT_TYPE[accountType]}</TableCell>
       <TableCell align='left'>
-        {ACCOUNT_TYPE[accountType]}
+        {getLocalDatetimeISOString(created_at)}
       </TableCell>
-      <TableCell align='left'>{getLocalDatetimeISOString(created_at)}</TableCell>
 
       <TableCell align='right'>
-        <MoreMenu 
+        <MoreMenu
           userId={id}
           disable={isRowLoginInUser}
           isDisabled={statusInfo.isClassDisabled}

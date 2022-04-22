@@ -1,4 +1,4 @@
-import AuthorizationRoute from "./authorizationRoute";
+import AuthorizationRoute from './authorizationRoute';
 
 /**
  * Wrapper for authorization route for ease of use
@@ -8,9 +8,8 @@ export default function AuthOnlyRoute({
   exact = false,
   children,
   alternativePath = '/signin',
-  location
+  location,
 }) {
-
   return (
     <AuthorizationRoute
       path={path}
@@ -20,5 +19,5 @@ export default function AuthOnlyRoute({
     >
       {children}
     </AuthorizationRoute>
-  )
+  );
 }

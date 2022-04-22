@@ -26,8 +26,7 @@ export default function UserSingle() {
     if (userId === loginUser.id.toString()) {
       toast.warning('Không thể chỉnh sửa tài khoản hiện tại đang đăng nhập');
       history.push('/users');
-    }
-    else {
+    } else {
       loadData(userId);
     }
   }, [userId, history, loginUser]);
@@ -37,24 +36,24 @@ export default function UserSingle() {
     setError(null);
     setIsLoading(true);
     AdminUsersAPI.fetchUserById(userId)
-    .then((res) => {
-      if (res.data.success) {
-        setUser(res.data.data);
-      } else {
-        throw new Error(res.data.message);
-      }
-    })
-    .catch((error) => {
-      let err = formatErrorResponse(error);
-      setError(err);
-    })
-    .finally(() => setIsLoading(false));
-  }
+      .then((res) => {
+        if (res.data.success) {
+          setUser(res.data.data);
+        } else {
+          throw new Error(res.data.message);
+        }
+      })
+      .catch((error) => {
+        let err = formatErrorResponse(error);
+        setError(err);
+      })
+      .finally(() => setIsLoading(false));
+  };
 
   const handleRefresh = () => loadData(userId);
   const onUpdateSuccess = (updateInfo) => {
     setUser(Object.assign({}, user, updateInfo));
-  }
+  };
 
   return (
     <DefaultLayout>
@@ -66,5 +65,5 @@ export default function UserSingle() {
         onUpdateSuccess={onUpdateSuccess}
       />
     </DefaultLayout>
-  )
+  );
 }

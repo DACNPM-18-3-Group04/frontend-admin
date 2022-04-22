@@ -8,7 +8,7 @@ import { USER_ACCOUNT_STATUS } from '../../../../../../helpers/constants';
 export default function ToggleDisable({
   userId,
   status = 'A',
-  onSuccess = () => {}
+  onSuccess = () => {},
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   let statusInfo = USER_ACCOUNT_STATUS[status];
@@ -26,23 +26,23 @@ export default function ToggleDisable({
   const handleClick = () => {
     setIsSubmitting(true);
     const updateData = {
-      status: (status === 'A') ? 'D' : 'A'
-    }
+      status: status === 'A' ? 'D' : 'A',
+    };
     const toastLoadingId = toast.loading('Đang cập nhật');
     AdminUsersAPI.editUser(userId, updateData)
-    .then((res) => {
-      toast.success('Cập nhật thành công');
-      onSuccess(updateData);
-    })
-    .catch((err) => {
-      console.log(err.response)
-      toast.error(`Lỗi cập nhật - ${getErrorMessage(err)}`);
-    })
-    .finally(() => {
-      setIsSubmitting(false);
-      toast.dismiss(toastLoadingId);
-    })
-  }
+      .then((res) => {
+        toast.success('Cập nhật thành công');
+        onSuccess(updateData);
+      })
+      .catch((err) => {
+        console.log(err.response);
+        toast.error(`Lỗi cập nhật - ${getErrorMessage(err)}`);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+        toast.dismiss(toastLoadingId);
+      });
+  };
 
   return (
     <LoadingButton
@@ -53,5 +53,5 @@ export default function ToggleDisable({
     >
       {isDisabled ? 'Hủy vô hiệu hóa' : 'Vô hiệu hóa'}
     </LoadingButton>
-  )
+  );
 }

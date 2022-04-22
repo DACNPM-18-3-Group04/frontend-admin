@@ -6,8 +6,8 @@ export default function AuthorizationRoute({
   path,
   exact = false,
   children,
-  authRequired = true,  // If false: only non-signed in users can go to, else go to alternative
-                        // If true: only signed in users can go to, else go to alternative
+  authRequired = true, // If false: only non-signed in users can go to, else go to alternative
+  // If true: only signed in users can go to, else go to alternative
   alternativePath = '/',
   location,
 }) {
@@ -16,19 +16,19 @@ export default function AuthorizationRoute({
   let goToPathExact = exact;
 
   return (
-    <Route
-      path={goToPath}
-      exact={goToPathExact}
-    >
-      {(user.isLogin === authRequired) 
-      ? children 
-      : <Redirect to={{ 
-          pathname: alternativePath, 
-          state: {
-            from: location
-          } 
-       }}
-      />}
+    <Route path={goToPath} exact={goToPathExact}>
+      {user.isLogin === authRequired ? (
+        children
+      ) : (
+        <Redirect
+          to={{
+            pathname: alternativePath,
+            state: {
+              from: location,
+            },
+          }}
+        />
+      )}
     </Route>
-  )
+  );
 }

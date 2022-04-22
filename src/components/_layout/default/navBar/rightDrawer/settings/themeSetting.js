@@ -8,13 +8,13 @@ export default function ThemeSetting() {
   const isDarkmode = currentTheme === 'dark';
 
   const handleThemeChange = (event) => {
-    const { checked } = event.target
+    const { checked } = event.target;
     if (checked) {
-      setTheme('dark')
+      setTheme('dark');
     } else {
-      setTheme('default')
+      setTheme('default');
     }
-  }
+  };
 
   return (
     <ListItem>
@@ -22,11 +22,7 @@ export default function ThemeSetting() {
         <DarkModeIcon />
       </ListItemIcon>
       <ListItemText>Chủ đề tối</ListItemText>
-      <Switch
-        edge='end'
-        checked={isDarkmode}
-        onChange={handleThemeChange}
-      />
+      <Switch edge='end' checked={isDarkmode} onChange={handleThemeChange} />
     </ListItem>
-  )
+  );
 }

@@ -10,21 +10,22 @@ const AlignEnd = styled(Box)(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function SignedInUserControlList({toggleClose}) {
+export default function SignedInUserControlList({ toggleClose }) {
   return (
     <Stack direction='column' spacing={1}>
       <AlignEnd>
         <Button
-          component={Link} to='/profile'
+          component={Link}
+          to='/profile'
           variant='contained'
-          startIcon={<AccountCircleIcon/>}
+          startIcon={<AccountCircleIcon />}
         >
           Tài khoản
         </Button>
       </AlignEnd>
       <AlignEnd>
-        <SignOutButton onAfterClicked={toggleClose}/>
+        <SignOutButton onAfterClicked={toggleClose} />
       </AlignEnd>
     </Stack>
-  )
+  );
 }

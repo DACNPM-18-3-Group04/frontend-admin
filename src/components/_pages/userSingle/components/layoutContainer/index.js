@@ -5,30 +5,33 @@ import UserEditFormPanel from '../form';
 import UserSingleToolbar from '../topbar';
 
 function LayoutContainer({
-  error, 
-  isLoading, 
+  error,
+  isLoading,
   user = {},
   handleRefresh = () => {},
-  onUpdateSuccess=() => {}
+  onUpdateSuccess = () => {},
 }) {
   if (error) {
-    return <ErrorPage 
-      code = {error.status}
-      title = {error.title}
-      details = {error.details}
-      message = {error.message}/>
+    return (
+      <ErrorPage
+        code={error.status}
+        title={error.title}
+        details={error.details}
+        message={error.message}
+      />
+    );
   } else if (isLoading) {
-    return <Loader/>;
+    return <Loader />;
   } else {
     return (
       <Container maxWidth='xl'>
-        <UserSingleToolbar 
+        <UserSingleToolbar
           userInfo={user}
           handleRefresh={handleRefresh}
           onUpdateSuccess={onUpdateSuccess}
         />
         <Box mt={2}>
-          <UserEditFormPanel 
+          <UserEditFormPanel
             userInfo={user}
             handleRefresh={handleRefresh}
             onUpdateSuccess={onUpdateSuccess}

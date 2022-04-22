@@ -10,11 +10,11 @@ export const defaultTheme = createTheme({
       main: '#2e7d32',
     },
     defaultColor: {
-      main: '#000000'
+      main: '#000000',
     },
     background: {
       default: '#e5e5e5',
-      paper: '#f5f5f5'
+      paper: '#f5f5f5',
     },
   },
 });
@@ -29,8 +29,8 @@ export const darkTheme = createTheme({
       main: '#2e7d32',
     },
     defaultColor: {
-      main: '#f1f1f1'
-    }
+      main: '#f1f1f1',
+    },
   },
   components: {
     MuiCssBaseline: {
@@ -43,11 +43,11 @@ export const darkTheme = createTheme({
 
 export const Themes = {
   default: defaultTheme,
-  dark: darkTheme
-}
+  dark: darkTheme,
+};
 
 export function getTheme(theme) {
-  return Themes[theme]
-};
+  return Themes[theme];
+}
 
 export default getTheme;

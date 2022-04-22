@@ -10,13 +10,14 @@ const AlignEnd = styled(Box)(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function SignedOutUserControlList({toggleClose}) {
+export default function SignedOutUserControlList({ toggleClose }) {
   return (
     <AlignEnd>
-      <Button 
-        component={Link} to='/signin'
+      <Button
+        component={Link}
+        to='/signin'
         variant='outlined'
-        startIcon={<LoginIcon/>}
+        startIcon={<LoginIcon />}
       >
         Đăng nhập
       </Button>

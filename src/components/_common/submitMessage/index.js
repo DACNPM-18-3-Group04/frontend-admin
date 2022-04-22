@@ -1,18 +1,15 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Typography } from '@mui/material';
 
 // Custom message to work with react-toastify
 export default function SubmitMessage({
   code = null,
   title,
-  details='',
-  message=''
+  details = '',
+  message = '',
 }) {
-  const msg = `${details ? details : message}${code ? `(${code})`: ''}`;
+  const msg = `${details ? details : message}${code ? `(${code})` : ''}`;
   return (
-    <Box
-      display='flex'
-      flexDirection='column'
-    >
+    <Box display='flex' flexDirection='column'>
       <Typography variant='h6'>{title}</Typography>
       <Typography variant='subtitle1'>{msg}</Typography>
     </Box>

@@ -6,26 +6,31 @@ import AdminListToolbar from '../topBar';
 import UserListTable from '../userTable';
 
 function UserLayoutContainer({
-  error, isLoaded, users, 
+  error,
+  isLoaded,
+  users,
   handleRefresh = () => {},
   onUpdateSuccess = () => {},
 }) {
   if (error) {
-    return <ErrorPage 
-      code = {error.status}
-      title = {error.title}
-      details = {error.details}
-      message = {error.message}
-      backToHome = {false}>
+    return (
+      <ErrorPage
+        code={error.status}
+        title={error.title}
+        details={error.details}
+        message={error.message}
+        backToHome={false}
+      >
         <Button onClick={handleRefresh}>Tải lại</Button>
-      </ErrorPage>;
+      </ErrorPage>
+    );
   } else if (!isLoaded) {
-    return <Loader/>;
+    return <Loader />;
   } else {
     return (
       <>
-        <AdminListToolbar handleRefresh={handleRefresh}/>
-        <UserListTable 
+        <AdminListToolbar handleRefresh={handleRefresh} />
+        <UserListTable
           userData={users}
           handleRefresh={handleRefresh}
           onUpdateSuccess={onUpdateSuccess}

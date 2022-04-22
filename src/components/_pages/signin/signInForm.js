@@ -1,9 +1,5 @@
-import { 
-  InputAdornment, IconButton
-} from '@mui/material';
-import {
-  LoadingButton
-} from '@mui/lab';
+import { InputAdornment, IconButton } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
 
@@ -21,23 +17,21 @@ import { getErrorMessage } from '../../../helpers/error/errorResponse';
 import { toast } from 'react-toastify';
 
 const validationSchema = yup.object({
-  username: yup
-    .string('Nhập username')
-    .required('Bắt buộc'),
+  username: yup.string('Nhập username').required('Bắt buộc'),
   password: yup
     .string('Nhập mật khẩu')
     .min(8, 'Tối thiểu 8 ký tự')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/,
-      "Ít nhất một ký tự viết hoa, một ký tự viết thường, một chữ số và một ký tự đặc biệt(@#$%^&*)"
+      'Ít nhất một ký tự viết hoa, một ký tự viết thường, một chữ số và một ký tự đặc biệt(@#$%^&*)',
     )
-    .required('Bắt buộc')
+    .required('Bắt buộc'),
 });
 
-export default function SignInForm({redirect = '/'}) {
+export default function SignInForm({ redirect = '/' }) {
   const [formStates, setFormStates] = useState({
     isSubmitting: false,
-    showPassword: false
+    showPassword: false,
   });
 
   const dispatch = useDispatch();
@@ -45,38 +39,36 @@ export default function SignInForm({redirect = '/'}) {
 
   const onSignInSuccess = (res) => {
     const resData = formatSignInResponse(res);
-    setFormStates({...formStates, isSubmitting: false});
-    
+    setFormStates({ ...formStates, isSubmitting: false });
+
     dispatch(signIn(resData));
     history.push(redirect);
-  }
+  };
 
   const onSignInFailure = (err) => {
-    setFormStates({...formStates, isSubmitting: false});
+    setFormStates({ ...formStates, isSubmitting: false });
     toast.error(getErrorMessage(err));
-  }
+  };
 
   const handleSubmit = async (values) => {
-    setFormStates({...formStates, isSubmitting: true});
+    setFormStates({ ...formStates, isSubmitting: true });
     const submitVal = {
       ...values,
       email: values.username,
-    }
-    selfMakeSignIn(submitVal)
-    .then(onSignInSuccess)
-    .catch(onSignInFailure)
-  }
+    };
+    selfMakeSignIn(submitVal).then(onSignInSuccess).catch(onSignInFailure);
+  };
   const handleToggleShowPassword = () => {
-    setFormStates({...formStates, showPassword: !formStates.showPassword})
-  }
-  
+    setFormStates({ ...formStates, showPassword: !formStates.showPassword });
+  };
+
   const formik = useFormik({
     initialValues: {
       username: '',
-      password: ''
+      password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: handleSubmit
+    onSubmit: handleSubmit,
   });
 
   return (
@@ -100,10 +92,7 @@ export default function SignInForm({redirect = '/'}) {
         label='Mật khẩu'
         endAdornment={
           <InputAdornment position='end'>
-            <IconButton
-              onClick={handleToggleShowPassword}
-              edge='end'
-            >
+            <IconButton onClick={handleToggleShowPassword} edge='end'>
               {formStates.showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
@@ -113,10 +102,10 @@ export default function SignInForm({redirect = '/'}) {
         error={Boolean(formik.errors.password)}
         helperText={formik.errors.password}
       />
-      <LoadingButton 
+      <LoadingButton
         loading={formStates.isSubmitting}
         variant='contained'
-        fullWidth 
+        fullWidth
         type='submit'
       >
         Đăng nhập

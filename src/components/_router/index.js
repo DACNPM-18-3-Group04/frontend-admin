@@ -16,10 +16,10 @@ function Router() {
   return (
     <Switch>
       <NonAuthOnlyRoute exact path='/signin'>
-        <SignInPage/>
+        <SignInPage />
       </NonAuthOnlyRoute>
       <AuthOnlyRoute exact path='/dashboard'>
-        <Redirect to='/users'/>
+        <Redirect to='/users' />
       </AuthOnlyRoute>
       <AuthOnlyRoute exact path='/profile'>
         <DefaultLayout>
@@ -32,9 +32,7 @@ function Router() {
       </AuthOnlyRoute>
       <AuthOnlyRoute path='/user/:userId'>
         {/* Edit single user */}
-        <DefaultLayout>
-          {/* <UserSingle /> */}
-        </DefaultLayout>
+        <DefaultLayout>{/* <UserSingle /> */}</DefaultLayout>
       </AuthOnlyRoute>
       <AuthOnlyRoute exact path='/p'>
         {/* List property */}
@@ -46,16 +44,16 @@ function Router() {
       </AuthOnlyRoute>
 
       <Route exact path='/notfound'>
-        <NotFoundPage/>
+        <NotFoundPage />
       </Route>
       <Route exact path='/'>
-        <Redirect to='/dashboard'/>
+        <Redirect to='/dashboard' />
       </Route>
       <Route>
-        <NotFoundPage/>
+        <NotFoundPage />
       </Route>
     </Switch>
-  )
+  );
 }
 
 export default Router;

@@ -6,7 +6,7 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TablePagination
+  TablePagination,
 } from '@mui/material';
 import { filter } from 'lodash';
 
@@ -41,7 +41,7 @@ export default function AdminListTable({
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = userData.map((item) => item.id)
+      const newSelecteds = userData.map((item) => item.id);
       // .filter((id) => id !== loginInUser.id);
       setSelected(newSelecteds);
       return;
@@ -63,7 +63,7 @@ export default function AdminListTable({
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
+        selected.slice(selectedIndex + 1),
       );
     }
     setSelected(newSelected);
@@ -86,97 +86,102 @@ export default function AdminListTable({
     //Delete
     const userInfo = userData.find((x) => x.id === userId);
     const updateData = {
-      status: (userInfo.status === 'A') ? 'D' : 'A'
-    }
+      status: userInfo.status === 'A' ? 'D' : 'A',
+    };
     const toastLoadingId = toast.loading('Đang cập nhật');
     AdminUsersAPI.editUser(userId, updateData)
-    .then((res) => {
-      toast.success('Cập nhật thành công');
-      onUpdateSuccess(userId, updateData)
-    })
-    .catch(() => {
-      toast.error('Lỗi cập nhật');
-    })
-    .finally(() => {
-      toast.dismiss(toastLoadingId);
-    })
-  }
+      .then((res) => {
+        toast.success('Cập nhật thành công');
+        onUpdateSuccess(userId, updateData);
+      })
+      .catch(() => {
+        toast.error('Lỗi cập nhật');
+      })
+      .finally(() => {
+        toast.dismiss(toastLoadingId);
+      });
+  };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - userData.length) : 0;
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - userData.length) : 0;
 
-  const filteredUsers = applySortFilter(userData, getComparator(order, orderBy), filterName);
+  const filteredUsers = applySortFilter(
+    userData,
+    getComparator(order, orderBy),
+    filterName,
+  );
 
   const isUserNotFound = filteredUsers.length === 0;
 
   return (
-        <Card>
-          <ListToolbar
+    <Card>
+      <ListToolbar
+        numSelected={selected.length}
+        filterName={filterName}
+        onFilterName={handleFilterByName}
+      />
+
+      <TableContainer>
+        <Table stickyHeader>
+          <ListHead
+            order={order}
+            orderBy={orderBy}
+            headLabel={TABLE_HEAD}
+            rowCount={userData.length}
             numSelected={selected.length}
-            filterName={filterName}
-            onFilterName={handleFilterByName}
+            onRequestSort={handleRequestSort}
+            onSelectAllClick={handleSelectAllClick}
+            selectAll={false}
           />
+          <TableBody>
+            {filteredUsers
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => {
+                // IMPORTANCE: EDIT SELECTED ITEM HERE
+                const { id } = row;
+                const isItemSelected = selected.indexOf(id) !== -1;
 
-          <TableContainer>
-            <Table stickyHeader>
-              <ListHead
-                order={order}
-                orderBy={orderBy}
-                headLabel={TABLE_HEAD}
-                rowCount={userData.length}
-                numSelected={selected.length}
-                onRequestSort={handleRequestSort}
-                onSelectAllClick={handleSelectAllClick}
-                selectAll={false}
-              />
-              <TableBody>
-                {filteredUsers
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
-                    // IMPORTANCE: EDIT SELECTED ITEM HERE
-                    const { id } = row;
-                    const isItemSelected = selected.indexOf(id) !== -1;
+                return (
+                  <UserTableRow
+                    key={row.id}
+                    row={row}
+                    selected={isItemSelected}
+                    handleClick={handleClick}
+                    handleDelete={handleDelete(id)}
+                  />
+                );
+              })}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
+          </TableBody>
+          {isUserNotFound && (
+            <TableBody>
+              <TableRow>
+                <TableCell align='center' colSpan={6} sx={{ py: 3 }}>
+                  <SearchNotFound
+                    isEmpty={isEmptyData}
+                    searchQuery={filterName}
+                  />
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          )}
+        </Table>
+      </TableContainer>
 
-                    return (
-                      <UserTableRow
-                        key={row.id}
-                        row={row}
-                        selected={isItemSelected}
-                        handleClick={handleClick}
-                        handleDelete={handleDelete(id)}
-                      />
-                    )
-                  })}
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )}
-              </TableBody>
-              {isUserNotFound && (
-                <TableBody>
-                  <TableRow>
-                    <TableCell align='center' colSpan={6} sx={{ py: 3 }}>
-                      <SearchNotFound 
-                        isEmpty={isEmptyData} 
-                        searchQuery={filterName} 
-                      />
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              )}
-            </Table>
-          </TableContainer>
-
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component='div'
-            count={userData.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Card>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component='div'
+        count={userData.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Card>
   );
 }
 
@@ -188,7 +193,7 @@ const TABLE_HEAD = [
   { id: 'status', label: 'Trạng thái', alignRight: false },
   { id: 'account_type', label: 'Loại tài khoản', alignRight: false },
   { id: 'createdAt', label: 'Thời gian tạo', alignRight: false },
-  { id: '' }
+  { id: '' },
 ];
 
 // ----------------------------------------------------------------------
@@ -219,10 +224,12 @@ function applySortFilter(array, comparator, query) {
   });
   if (query) {
     return filter(
-      array, 
+      array,
       // Search with 'fullname', edit below
-      (_data) => removeSigns(_data.fullname).toLowerCase().indexOf(
-        removeSigns(query).toLowerCase()) !== -1
+      (_data) =>
+        removeSigns(_data.fullname)
+          .toLowerCase()
+          .indexOf(removeSigns(query).toLowerCase()) !== -1,
     );
   }
   return stabilizedThis.map((el) => el[0]);

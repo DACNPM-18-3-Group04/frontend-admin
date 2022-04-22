@@ -13,9 +13,10 @@ import Avatar from './avatar';
 import { title } from './customStyle';
 
 export default function UserInfoPage() {
-  const { 
-    fullname, avatar, 
-    // contact_email, contact_number 
+  const {
+    fullname,
+    avatar,
+    // contact_email, contact_number
   } = useSelector(selectUser);
   const [email, setEmail] = useState('');
 

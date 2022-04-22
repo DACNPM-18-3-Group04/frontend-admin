@@ -5,27 +5,23 @@ import { useState } from 'react';
 
 import AddDialog from './dialog';
 
-export default function AddModal({onSuccess = () => {}}) {
+export default function AddModal({ onSuccess = () => {} }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
-  }
+  };
 
   const toggleClose = () => {
     setIsOpen(false);
-  }
+  };
 
   return (
     <>
       <IconButton onClick={toggleOpen}>
-        <PersonAddIcon/>
+        <PersonAddIcon />
       </IconButton>
-      <AddDialog
-        open={isOpen}
-        onClose={toggleClose}
-        onSuccess={onSuccess}
-      />
+      <AddDialog open={isOpen} onClose={toggleClose} onSuccess={onSuccess} />
     </>
-  )
+  );
 }

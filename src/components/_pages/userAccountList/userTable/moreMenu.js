@@ -1,8 +1,12 @@
 import { useRef, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
-import { 
-  Menu, MenuItem, IconButton, ListItemIcon, ListItemText,
+import {
+  Menu,
+  MenuItem,
+  IconButton,
+  ListItemIcon,
+  ListItemText,
   Tooltip,
 } from '@mui/material';
 
@@ -26,10 +30,20 @@ export default function MoreMenu({
 
   return (
     <>
-      <Tooltip title={disable ? 'Tài khoản đăng nhập hiện tại, không chỉnh sửa được' : 'Thêm'}>
+      <Tooltip
+        title={
+          disable
+            ? 'Tài khoản đăng nhập hiện tại, không chỉnh sửa được'
+            : 'Thêm'
+        }
+      >
         <span>
-          <IconButton ref={ref} disabled={disable} onClick={() => setIsOpen(true)}>
-            <MoreVertIcon/>
+          <IconButton
+            ref={ref}
+            disabled={disable}
+            onClick={() => setIsOpen(true)}
+          >
+            <MoreVertIcon />
           </IconButton>
         </span>
       </Tooltip>
@@ -39,32 +53,45 @@ export default function MoreMenu({
         anchorEl={ref.current}
         onClose={() => setIsOpen(false)}
         PaperProps={{
-          sx: { width: 200, maxWidth: '100%' }
+          sx: { width: 200, maxWidth: '100%' },
         }}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        {isDisabled ? 
+        {isDisabled ? (
           <MenuItem sx={{ color: 'text.secondary' }} onClick={onDeleteClick}>
             <ListItemIcon>
-              <RestoreFromTrashIcon/>
+              <RestoreFromTrashIcon />
             </ListItemIcon>
-            <ListItemText primary='Hủy vô hiệu' primaryTypographyProps={{ variant: 'body2' }} />
+            <ListItemText
+              primary='Hủy vô hiệu'
+              primaryTypographyProps={{ variant: 'body2' }}
+            />
           </MenuItem>
-          :
+        ) : (
           <MenuItem sx={{ color: 'text.secondary' }} onClick={onDeleteClick}>
             <ListItemIcon>
-              <DeleteIcon/>
+              <DeleteIcon />
             </ListItemIcon>
-            <ListItemText primary='Vô hiệu' primaryTypographyProps={{ variant: 'body2' }} />
+            <ListItemText
+              primary='Vô hiệu'
+              primaryTypographyProps={{ variant: 'body2' }}
+            />
           </MenuItem>
-        }
+        )}
 
-        <MenuItem component={RouterLink} to={editLink} sx={{ color: 'text.secondary' }}>
+        <MenuItem
+          component={RouterLink}
+          to={editLink}
+          sx={{ color: 'text.secondary' }}
+        >
           <ListItemIcon>
-            <EditIcon/>
+            <EditIcon />
           </ListItemIcon>
-          <ListItemText primary='Chỉnh sửa' primaryTypographyProps={{ variant: 'body2' }} />
+          <ListItemText
+            primary='Chỉnh sửa'
+            primaryTypographyProps={{ variant: 'body2' }}
+          />
         </MenuItem>
       </Menu>
     </>
