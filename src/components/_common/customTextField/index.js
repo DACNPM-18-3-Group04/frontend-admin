@@ -1,17 +1,29 @@
-import { FormControl, InputLabel, OutlinedInput, FormHelperText } from "@mui/material"
+import {
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  FormHelperText,
+} from '@mui/material';
 
 export default function CustomTextField({
-  id, label, autoFocus, disabled,
-  fullWidth, margin='dense', size='medium',
-  error=false, 
-  type, value, onChange,
+  id,
+  label,
+  autoFocus,
+  disabled,
+  fullWidth,
+  margin = 'dense',
+  size = 'medium',
+  error = false,
+  type,
+  value,
+  onChange,
   endAdornment,
-  helperText
+  helperText,
 }) {
   return (
-    <FormControl 
-      fullWidth={fullWidth} 
-      margin={margin} 
+    <FormControl
+      fullWidth={fullWidth}
+      margin={margin}
       size={size}
       variant='outlined'
       disabled={disabled}
@@ -32,5 +44,5 @@ export default function CustomTextField({
         {helperText || ' '}
       </FormHelperText>
     </FormControl>
-  )
+  );
 }

@@ -1,11 +1,7 @@
-import { 
-  InputAdornment, IconButton
-} from '@mui/material';
+import { InputAdornment, IconButton } from '@mui/material';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
-import {
-  LoadingButton
-} from '@mui/lab';
+import { LoadingButton } from '@mui/lab';
 
 import CustomTextField from '../../../../../_common/customTextField';
 
@@ -22,7 +18,7 @@ const validationSchema = yup.object({
     .min(8, 'Tối thiểu 8 ký tự')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/,
-      "Ít nhất một ký tự viết hoa, một ký tự viết thường, một chữ số và một ký tự đặc biệt(@#$%^&*)"
+      'Ít nhất một ký tự viết hoa, một ký tự viết thường, một chữ số và một ký tự đặc biệt(@#$%^&*)',
     )
     .required('Bắt buộc'),
   passwordConfirm: yup
@@ -32,9 +28,9 @@ const validationSchema = yup.object({
 });
 
 function UserResetPwdForm({
-  userInfo = {}, 
-  onSuccess = () => {}, 
-  onFailed = () => {}
+  userInfo = {},
+  onSuccess = () => {},
+  onFailed = () => {},
 }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
@@ -44,26 +40,26 @@ function UserResetPwdForm({
     const submitData = values;
     setIsSubmitting(true);
     AdminUsersAPI.resetPassword(userId, submitData)
-    .then((res) => {
-      onSuccess();
-      toast.success('Reset thành công')
-      formik.resetForm();
-    })
-    .catch(() => {
-      toast.error('Lỗi cập nhật');
-    })
-    .finally(() => {
-      setIsSubmitting(false);
-    })
-  }
+      .then((res) => {
+        onSuccess();
+        toast.success('Reset thành công');
+        formik.resetForm();
+      })
+      .catch(() => {
+        toast.error('Lỗi cập nhật');
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
+  };
 
   const handleToggleShowPassword = () => {
     setShowPassword(!showPassword);
-  }
+  };
 
   const handleToggleShowConfirmPassword = () => {
     setShowPasswordConfirm(!showPasswordConfirm);
-  }
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -71,7 +67,7 @@ function UserResetPwdForm({
       passwordConfirm: '',
     },
     validationSchema: validationSchema,
-    onSubmit: handleSubmit
+    onSubmit: handleSubmit,
   });
 
   return (
@@ -85,10 +81,7 @@ function UserResetPwdForm({
         label='Mật khẩu'
         endAdornment={
           <InputAdornment position='end'>
-            <IconButton
-              onClick={handleToggleShowPassword}
-              edge='end'
-            >
+            <IconButton onClick={handleToggleShowPassword} edge='end'>
               {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
@@ -107,10 +100,7 @@ function UserResetPwdForm({
         label='Xác nhận mật khẩu'
         endAdornment={
           <InputAdornment position='end'>
-            <IconButton
-              onClick={handleToggleShowConfirmPassword}
-              edge='end'
-            >
+            <IconButton onClick={handleToggleShowConfirmPassword} edge='end'>
               {showPasswordConfirm ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
@@ -120,16 +110,16 @@ function UserResetPwdForm({
         error={Boolean(formik.errors.passwordConfirm)}
         helperText={formik.errors.passwordConfirm}
       />
-      <LoadingButton 
+      <LoadingButton
         loading={isSubmitting}
         variant='contained'
-        fullWidth 
+        fullWidth
         type='submit'
       >
         Reset mật khẩu
       </LoadingButton>
     </form>
-  )
+  );
 }
 
 export default UserResetPwdForm;

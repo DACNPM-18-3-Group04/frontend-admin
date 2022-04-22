@@ -5,28 +5,28 @@ import { useState } from 'react';
 
 import InviteUserDialog from './dialog';
 
-export default function InviteUserModal({classInfo, role}) {
+export default function InviteUserModal({ classInfo, role }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
-  }
+  };
 
   const toggleClose = () => {
     setIsOpen(false);
-  }
+  };
 
   return (
     <>
       <IconButton onClick={toggleOpen}>
-        <PersonAddIcon/>
+        <PersonAddIcon />
       </IconButton>
-      <InviteUserDialog 
+      <InviteUserDialog
         open={isOpen}
         toggleClose={toggleClose}
         classInfo={classInfo}
         role={role}
       />
     </>
-  )
+  );
 }

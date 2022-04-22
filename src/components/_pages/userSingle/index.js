@@ -11,6 +11,7 @@ import LayoutContainer from './components/layoutContainer';
 
 import AdminUsersAPI from '../../../helpers/api/admin/users';
 import { toast } from 'react-toastify';
+import formatErrorResponse from '../../../helpers/utils/formatErrorResponse';
 
 export default function UserSingle() {
   const { userId } = useParams();
@@ -24,9 +25,8 @@ export default function UserSingle() {
   useEffect(() => {
     if (userId === loginUser.id.toString()) {
       toast.warning('Không thể chỉnh sửa tài khoản hiện tại đang đăng nhập');
-      history.push('/users/admin');
-    }
-    else {
+      history.push('/users');
+    } else {
       loadData(userId);
     }
   }, [userId, history, loginUser]);
@@ -36,35 +36,24 @@ export default function UserSingle() {
     setError(null);
     setIsLoading(true);
     AdminUsersAPI.fetchUserById(userId)
-    .then((res) => {
-      if (res.data.success) {
-        setUser(res.data.data);
-      } else {
-        throw new Error(res.data.message);
-      }
-    })
-    .catch((error) => {
-      let err = {};
-      if (error.response) {
-        if (error.response.data) {
-          err.status = error.response.status;
-          err.message = error.response.data.message;
+      .then((res) => {
+        if (res.data.success) {
+          setUser(res.data.data);
         } else {
-          //Incase cannot request to server
-          err.message = error.response.message;
+          throw new Error(res.data.message);
         }
-      } else {
-        err.message = error.message;
-      }
-      setError(err);
-    })
-    .finally(() => setIsLoading(false));
-  }
+      })
+      .catch((error) => {
+        let err = formatErrorResponse(error);
+        setError(err);
+      })
+      .finally(() => setIsLoading(false));
+  };
 
   const handleRefresh = () => loadData(userId);
   const onUpdateSuccess = (updateInfo) => {
     setUser(Object.assign({}, user, updateInfo));
-  }
+  };
 
   return (
     <DefaultLayout>
@@ -76,5 +65,5 @@ export default function UserSingle() {
         onUpdateSuccess={onUpdateSuccess}
       />
     </DefaultLayout>
-  )
+  );
 }

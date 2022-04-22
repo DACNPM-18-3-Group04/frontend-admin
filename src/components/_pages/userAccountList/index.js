@@ -2,8 +2,9 @@
 import { useState, useEffect } from 'react';
 
 import AdminUsersAPI from '../../../helpers/api/admin/users';
-import DefaultLayout from '../../_layout/default';
 import UserLayoutContainer from './layoutContainer';
+import DefaultLayout from '../../_layout/default';
+import formatErrorResponse from '../../../helpers/utils/formatErrorResponse';
 
 export default function UserAccountList() {
   const [users, setUsers] = useState([]);
@@ -19,55 +20,38 @@ export default function UserAccountList() {
     setError(null);
     setIsLoaded(false);
     AdminUsersAPI.fetchAll()
-    .then(
-      (res) => {
+      .then((res) => {
         setIsLoaded(true);
         if (res.data.success) {
-          setUsers(res.data.data.listUser);
+          setUsers(res.data.data.users);
+        } else {
+          throw new Error('Lỗi lấy danh sách');
         }
-        else {
-          throw new Error('Lỗi lấy danh sách')
-        }        
-      },
-    )
-    .catch(
-      (error) => {
-        let res = {};
-        if (error.response && error.response.data) {
-          if (error.response.data) {
-            res = {...error.response.data};
-          }
-          //Incase cannot request to server
-          res.data = error.response.data;
-          res.status = error.response.status;
-        }
-        else {
-          res.message = error.message;
-        }
+      })
+      .catch((error) => {
+        let res = formatErrorResponse(error);
         setIsLoaded(true);
         setError(res);
-      }
-    )
-  }
+      });
+  };
 
   const handleRefresh = () => {
-    loadData()
-  }
+    loadData();
+  };
 
   const onUpdateSuccess = (id, newData) => {
-    const index = users.findIndex(x => x.id === id);
+    const index = users.findIndex((x) => x.id === id);
     if (index === -1) {
       // Not found
       return;
-    }
-    else {
+    } else {
       setUsers([
-        ...users.slice(0,index),
+        ...users.slice(0, index),
         Object.assign({}, users[index], newData),
         ...users.slice(index + 1),
-      ])
+      ]);
     }
-  }
+  };
 
   return (
     <DefaultLayout>
@@ -79,5 +63,5 @@ export default function UserAccountList() {
         onUpdateSuccess={onUpdateSuccess}
       />
     </DefaultLayout>
-  )
+  );
 }

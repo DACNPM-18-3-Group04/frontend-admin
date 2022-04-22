@@ -11,9 +11,13 @@ import { Link } from 'react-router-dom';
  * @param {boolean} backToHome Display back to home button
  * @returns React Component
  */
-function ErrorPage({ 
-  code, title, details, message = null, 
-  children = null, backToHome = true,
+function ErrorPage({
+  code,
+  title,
+  details,
+  message = null,
+  children = null,
+  backToHome = true,
   minHeight = '90vh',
 }) {
   return (
@@ -24,7 +28,7 @@ function ErrorPage({
         direction='column'
         alignItems='center'
         justifyContent='center'
-        style={{ minHeight: minHeight /* Layout height */}}
+        style={{ minHeight: minHeight /* Layout height */ }}
       >
         <Grid item xs={3}>
           <Box>
@@ -32,15 +36,13 @@ function ErrorPage({
             <h2>{title}</h2>
             <p>{details ? details : message}</p>
             {children}
-            {backToHome ? 
-              <Button 
-                variant='contained'
-                component={Link}
-                to='/'
-              >
+            {backToHome ? (
+              <Button variant='contained' component={Link} to='/'>
                 Trang chủ
-              </Button> 
-              : <div/>}
+              </Button>
+            ) : (
+              <div />
+            )}
           </Box>
         </Grid>
       </Grid>

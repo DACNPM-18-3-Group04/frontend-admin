@@ -9,25 +9,28 @@ import {
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../../../redux/slices/user';
-import { USER_ACCOUNT_STATUS } from '../../../../helpers/constants';
-import { getLocalDatetimeString } from '../../../../helpers/datetime';
+import {
+  USER_ACCOUNT_STATUS,
+  ACCOUNT_TYPE,
+} from '../../../../helpers/constants';
+import getLocalDatetimeISOString from '../../../../helpers/utils/getLocalDatetimeISOString';
 
-import UserMoreMenu from '../../../_common/userTable/userMoreMenu';
+import MoreMenu from './moreMenu';
 
 export default function UserTableRow({
-  row = {}, 
-  selected = false, 
+  row = {},
+  selected = false,
   handleClick = () => {},
-  handleDelete = () => {}
+  handleDelete = () => {},
 }) {
-  const { 
-    id, 
-    full_name: name, 
-    status, 
-    username, 
-    avatar: avatarUrl, 
-    last_login_at: lastActive,
-    created_at,
+  const {
+    id,
+    fullname: name,
+    status,
+    email: username,
+    avatar: avatarUrl,
+    account_type: accountType,
+    createdAt: created_at,
   } = row;
 
   let statusInfo = USER_ACCOUNT_STATUS[status];
@@ -52,12 +55,14 @@ export default function UserTableRow({
         <Checkbox
           disabled={isRowLoginInUser}
           checked={selected}
-          onChange={(event) => handleClick(event, name)}
+          onChange={(event) => handleClick(event, id)}
         />
       </TableCell>
       <TableCell component='th' scope='row' padding='none'>
         <Stack direction='row' alignItems='center' spacing={2}>
-          <Avatar alt={name} src={avatarUrl} />
+          <Avatar alt={name} src={avatarUrl}>
+            {name ? name.charAt(0) : null}
+          </Avatar>
           <Typography variant='subtitle2' noWrap>
             {name}
           </Typography>
@@ -65,16 +70,15 @@ export default function UserTableRow({
       </TableCell>
       <TableCell align='left'>{username}</TableCell>
       <TableCell align='left'>
-        <Chip
-          label={statusInfo.text}
-          color={statusInfo.color}
-        />
+        <Chip label={statusInfo.text} color={statusInfo.color} />
       </TableCell>
-      <TableCell align='left'>{getLocalDatetimeString(lastActive)}</TableCell>
-      <TableCell align='left'>{getLocalDatetimeString(created_at)}</TableCell>
+      <TableCell align='left'>{ACCOUNT_TYPE[accountType]}</TableCell>
+      <TableCell align='left'>
+        {getLocalDatetimeISOString(created_at)}
+      </TableCell>
 
       <TableCell align='right'>
-        <UserMoreMenu 
+        <MoreMenu
           userId={id}
           disable={isRowLoginInUser}
           isDisabled={statusInfo.isClassDisabled}

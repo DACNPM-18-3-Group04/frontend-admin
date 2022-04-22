@@ -1,5 +1,5 @@
 // References: https://www.58bits.com/blog/2020/05/27/material-ui-theme-switcher-react
-import { useState, createContext } from "react";
+import { useState, createContext } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { getTheme } from './themes';
 import { ToastContainer } from 'react-toastify';
@@ -10,10 +10,10 @@ const DEFAULT_THEME = 'default';
 
 export const ThemeContext = createContext({
   currentTheme: DEFAULT_THEME,
-  setTheme: null
+  setTheme: null,
 });
 
-export default function CustomThemeProvider({children}) {
+export default function CustomThemeProvider({ children }) {
   // Read current theme from somewhere (API/storage)
   const currentTheme = localStorage.getItem('theme') || DEFAULT_THEME;
   const [themeName, _setThemeName] = useState(currentTheme);
@@ -23,12 +23,12 @@ export default function CustomThemeProvider({children}) {
   const setThemeName = (newThemeName) => {
     localStorage.setItem('theme', newThemeName);
     _setThemeName(newThemeName);
-  }
+  };
 
   const contextValue = {
     currentTheme: currentTheme,
-    setTheme: setThemeName
-  }
+    setTheme: setThemeName,
+  };
 
   return (
     <ThemeContext.Provider value={contextValue}>

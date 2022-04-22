@@ -1,7 +1,5 @@
 import { TextField } from '@mui/material';
-import {
-  LoadingButton
-} from '@mui/lab';
+import { LoadingButton } from '@mui/lab';
 
 import * as yup from 'yup';
 import { useFormik } from 'formik';
@@ -22,13 +20,13 @@ const validationSchema = yup.object({
     .required('Bắt buộc'),
   user_code: yup
     .string('Nhập số mã sinh viên')
-    .matches(/[\w-]{6,8}/,'Mã sinh viên không hợp lệ')
+    .matches(/[\w-]{6,8}/, 'Mã sinh viên không hợp lệ'),
 });
 
 function UserEditForm({
-  userInfo = {}, 
-  onSuccess = () => {}, 
-  onFailed = () => {}
+  userInfo = {},
+  onSuccess = () => {},
+  onFailed = () => {},
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const handleSubmit = async (values) => {
@@ -36,17 +34,17 @@ function UserEditForm({
     const submitData = values;
     setIsSubmitting(true);
     AdminUsersAPI.editUser(userId, submitData)
-    .then((res) => {
-      toast.success('Cập nhật thành công');
-      onSuccess(submitData);
-    })
-    .catch(() => {
-      toast.error('Lỗi cập nhật');
-    })
-    .finally(() => {
-      setIsSubmitting(false);
-    })
-  }
+      .then((res) => {
+        toast.success('Cập nhật thành công');
+        onSuccess(submitData);
+      })
+      .catch(() => {
+        toast.error('Lỗi cập nhật');
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -55,7 +53,7 @@ function UserEditForm({
       user_code: userInfo.user_code || '',
     },
     validationSchema: validationSchema,
-    onSubmit: handleSubmit
+    onSubmit: handleSubmit,
   });
 
   return (
@@ -97,16 +95,16 @@ function UserEditForm({
         error={Boolean(formik.errors.user_code)}
         helperText={formik.errors.user_code || ' '}
       />
-      <LoadingButton 
+      <LoadingButton
         loading={isSubmitting}
         variant='contained'
-        fullWidth 
+        fullWidth
         type='submit'
       >
         Lưu thay đổi
       </LoadingButton>
     </form>
-  )
+  );
 }
 
 export default UserEditForm;

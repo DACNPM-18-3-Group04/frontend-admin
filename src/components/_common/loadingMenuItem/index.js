@@ -1,7 +1,4 @@
-import {
-  MenuItem,
-  CircularProgress
-} from '@mui/material';
+import { MenuItem, CircularProgress } from '@mui/material';
 
 export default function LoadingMenuItem({
   loading,
@@ -10,17 +7,15 @@ export default function LoadingMenuItem({
   loadingText = 'Đang tải',
 }) {
   return (
-    <MenuItem 
-      disabled={loading}
-      onClick={onClick}
-    >
-      {loading ? 
-        <span style={{display: 'flex'}}>
-          <CircularProgress size={21} sx={{marginRight: 1}}/>
+    <MenuItem disabled={loading} onClick={onClick}>
+      {loading ? (
+        <span style={{ display: 'flex' }}>
+          <CircularProgress size={21} sx={{ marginRight: 1 }} />
           {loadingText}
-        </span> 
-        : <span>{text}</span>
-      }
+        </span>
+      ) : (
+        <span>{text}</span>
+      )}
     </MenuItem>
-  )
+  );
 }

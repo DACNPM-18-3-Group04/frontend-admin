@@ -1,4 +1,4 @@
-import ErrorPage from "../../_common/error";
+import ErrorPage from '../../_common/error';
 
 export default function NotFoundPage() {
   return (
@@ -7,5 +7,5 @@ export default function NotFoundPage() {
       title='Không tồn tại'
       details='Trang yêu cầu không tồn tại'
     />
-  )
+  );
 }

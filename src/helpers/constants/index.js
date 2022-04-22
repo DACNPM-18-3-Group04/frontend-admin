@@ -4,19 +4,26 @@ export const ACCEPT_IMAGE_MIMETYPES = Object.freeze([
 ]);
 
 export const USER_ACCOUNT_STATUS = Object.freeze({
-  'A': {
+  A: {
     color: 'success',
     text: 'Đã kích hoạt',
     isClassDisabled: false,
   },
-  'I': {
+  I: {
     color: 'warning',
     text: 'Chưa kích hoạt',
     isClassDisabled: false,
   },
-  'D': {
+  D: {
     color: 'error',
     text: 'Bị Lock',
     isClassDisabled: true,
   },
+});
+
+export const ACCOUNT_TYPE = Object.freeze({
+  ADMIN: 'A',
+  USER: 'C',
+  A: 'Admin',
+  C: 'User',
 });

@@ -10,37 +10,27 @@ export default function UserEditFormPanel({
   return (
     <Container maxWidth='xl'>
       <Grid container spacing={2}>
-        <Grid item lg={8} xs={12} order={{ xs: 2, lg: 1}}>
+        <Grid item lg={8} xs={12} order={{ xs: 2, lg: 1 }}>
           <Paper>
             <Box padding={2}>
-              <Typography>
-                Chỉnh sửa thông tin
-              </Typography>
+              <Typography>Chỉnh sửa thông tin</Typography>
               <Box>
-                <UserEditForm 
-                  userInfo={userInfo}
-                  onSuccess={onUpdateSuccess}
-                />
+                <UserEditForm userInfo={userInfo} onSuccess={onUpdateSuccess} />
               </Box>
             </Box>
           </Paper>
         </Grid>
-        <Grid item lg={4} xs={12} order={{ xs: 1, lg: 2}}>
+        <Grid item lg={4} xs={12} order={{ xs: 1, lg: 2 }}>
           <Paper>
-              <Box padding={2}>
-                <Typography>
-                  Reset mật khẩu
-                </Typography>
-                <Box>
-                  <UserResetPwdForm
-                    userInfo={userInfo}
-                  />
-                </Box>
+            <Box padding={2}>
+              <Typography>Reset mật khẩu</Typography>
+              <Box>
+                <UserResetPwdForm userInfo={userInfo} />
               </Box>
-            </Paper>
+            </Box>
+          </Paper>
         </Grid>
       </Grid>
-    </Container> 
-    
-  )
+    </Container>
+  );
 }

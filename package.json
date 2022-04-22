@@ -36,13 +36,23 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "react-scripts": "4.0.3"
+    "react-scripts": "4.0.3",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-prettier-check": "^1.0.0",
+    "eslint-config-react-app": "^7.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "prettier": "^2.6.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/*.{js,ts,tsx}",
+    "eslint-check": "eslint --print-config src/index.js | eslint-config-prettier-check",
+    "prettier": "prettier --write ./src"
   },
   "eslintConfig": {
     "extends": [

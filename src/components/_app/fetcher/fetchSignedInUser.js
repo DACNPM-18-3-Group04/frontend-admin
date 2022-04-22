@@ -21,13 +21,15 @@ export default function FetchSignedInUser({ children }) {
         let userInfo = JSON.parse(userInfoString);
         userInfo.token = token;
         dispatch(signIn(userInfo));
-      } catch (parseError) { /* ignored */}
+      } catch (parseError) {
+        /* ignored */
+      }
     }
     setIsLoading(false);
   }, [dispatch]);
 
   if (isLoading) {
-    return <Loader label='Tải thông tin đăng nhập'/>
+    return <Loader label='Tải thông tin đăng nhập' />;
   }
   return children;
 }

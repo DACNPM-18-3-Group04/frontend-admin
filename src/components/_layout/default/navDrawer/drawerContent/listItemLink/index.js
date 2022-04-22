@@ -1,25 +1,18 @@
-import {
-  ListItemButton,
-  ListItemText,
-  ListItemIcon,
-} from '@mui/material';
+import { ListItemButton, ListItemText, ListItemIcon } from '@mui/material';
 
-import {
-  Link,
-  useLocation,
-} from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom';
 
 export default function ListItemLink(props) {
   const { text, icon, to, open, ...other } = props;
   const location = useLocation();
 
-  let listItemProps = {}
+  let listItemProps = {};
   if (to) {
     listItemProps = {
       component: Link,
       to: to,
-      selected: (location.pathname === to)
-    }
+      selected: location.pathname === to,
+    };
   }
 
   return (

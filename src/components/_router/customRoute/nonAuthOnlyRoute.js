@@ -1,4 +1,4 @@
-import AuthorizationRoute from "./authorizationRoute";
+import AuthorizationRoute from './authorizationRoute';
 
 /**
  * Wrapper for authorization route for ease of use
@@ -8,9 +8,8 @@ export default function NonAuthOnlyRoute({
   exact = false,
   children,
   alternativePath = '/',
-  location
+  location,
 }) {
-
   return (
     <AuthorizationRoute
       path={path}
@@ -21,5 +20,5 @@ export default function NonAuthOnlyRoute({
     >
       {children}
     </AuthorizationRoute>
-  )
+  );
 }

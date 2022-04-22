@@ -5,26 +5,25 @@ import { useHistory } from 'react-router';
 import { signOut as signOutReducer } from '../../../redux/slices/user';
 import { signOut as signOutAPI } from '../../../helpers/api/auth';
 
-export default function SignOutButton({onAfterClicked = () => {}}) {
+export default function SignOutButton({ onAfterClicked = () => {} }) {
   const dispatch = useDispatch();
   const history = useHistory();
-  
+
   const handleSignOut = () => {
-    signOutAPI()
-    .finally(() => {
+    signOutAPI().finally(() => {
       dispatch(signOutReducer());
       history.push('/signin');
       onAfterClicked();
     });
-  }
+  };
 
   return (
-    <Button 
+    <Button
       onClick={handleSignOut}
-      variant='outlined' 
-      startIcon={<LogoutIcon/>}
+      variant='outlined'
+      startIcon={<LogoutIcon />}
     >
       Đăng xuất
     </Button>
-  )
+  );
 }

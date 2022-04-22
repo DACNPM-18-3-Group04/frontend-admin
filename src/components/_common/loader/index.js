@@ -1,6 +1,12 @@
-import { Container, Grid, Box, CircularProgress, useTheme } from '@mui/material';
+import {
+  Container,
+  Grid,
+  Box,
+  CircularProgress,
+  useTheme,
+} from '@mui/material';
 
-function Loader({label = 'Đang tải'}) {
+function Loader({ label = 'Đang tải' }) {
   const theme = useTheme();
   return (
     <Container>
@@ -17,9 +23,9 @@ function Loader({label = 'Đang tải'}) {
             flexDirection='column'
             alignItems='center'
             justifyContent='enter'
-            style = {{ marginTop: theme.spacing(2)}}
+            style={{ marginTop: theme.spacing(2) }}
           >
-            <CircularProgress color='secondary'/>
+            <CircularProgress color='secondary' />
             <p>{label}</p>
           </Box>
         </Grid>
