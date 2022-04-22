@@ -11,6 +11,7 @@ import LayoutContainer from './components/layoutContainer';
 
 import AdminUsersAPI from '../../../helpers/api/admin/users';
 import { toast } from 'react-toastify';
+import formatErrorResponse from '../../../helpers/utils/formatErrorResponse';
 
 export default function UserSingle() {
   const { userId } = useParams();
@@ -24,7 +25,7 @@ export default function UserSingle() {
   useEffect(() => {
     if (userId === loginUser.id.toString()) {
       toast.warning('Không thể chỉnh sửa tài khoản hiện tại đang đăng nhập');
-      history.push('/users/admin');
+      history.push('/users');
     }
     else {
       loadData(userId);
@@ -44,18 +45,7 @@ export default function UserSingle() {
       }
     })
     .catch((error) => {
-      let err = {};
-      if (error.response) {
-        if (error.response.data) {
-          err.status = error.response.status;
-          err.message = error.response.data.message;
-        } else {
-          //Incase cannot request to server
-          err.message = error.response.message;
-        }
-      } else {
-        err.message = error.message;
-      }
+      let err = formatErrorResponse(error);
       setError(err);
     })
     .finally(() => setIsLoading(false));

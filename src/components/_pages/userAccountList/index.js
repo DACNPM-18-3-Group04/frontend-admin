@@ -2,8 +2,9 @@
 import { useState, useEffect } from 'react';
 
 import AdminUsersAPI from '../../../helpers/api/admin/users';
-import DefaultLayout from '../../_layout/default';
 import UserLayoutContainer from './layoutContainer';
+import DefaultLayout from '../../_layout/default';
+import formatErrorResponse from '../../../helpers/utils/formatErrorResponse';
 
 export default function UserAccountList() {
   const [users, setUsers] = useState([]);
@@ -23,7 +24,7 @@ export default function UserAccountList() {
       (res) => {
         setIsLoaded(true);
         if (res.data.success) {
-          setUsers(res.data.data.listUser);
+          setUsers(res.data.data.users);
         }
         else {
           throw new Error('Lỗi lấy danh sách')
@@ -32,18 +33,7 @@ export default function UserAccountList() {
     )
     .catch(
       (error) => {
-        let res = {};
-        if (error.response && error.response.data) {
-          if (error.response.data) {
-            res = {...error.response.data};
-          }
-          //Incase cannot request to server
-          res.data = error.response.data;
-          res.status = error.response.status;
-        }
-        else {
-          res.message = error.message;
-        }
+        let res = formatErrorResponse(error);
         setIsLoaded(true);
         setError(res);
       }

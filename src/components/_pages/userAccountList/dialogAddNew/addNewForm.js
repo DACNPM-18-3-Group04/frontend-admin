@@ -1,5 +1,5 @@
 import { 
-  InputAdornment, IconButton
+  InputAdornment, IconButton, TextField, MenuItem
 } from '@mui/material';
 
 import {
@@ -15,7 +15,8 @@ import CustomTextField from '../../../_common/customTextField';
 
 import AdminUsersAPI from '../../../../helpers/api/admin/users';
 import { toast } from 'react-toastify';
-import { getErrorMessage } from '../../../../helpers/error';
+import { getErrorMessage } from '../../../../helpers/error/errorResponse';
+import { ACCOUNT_TYPE } from '../../../../helpers/constants';
 
 
 const validationSchema = yup.object({
@@ -31,6 +32,9 @@ const validationSchema = yup.object({
       "Ít nhất một ký tự viết hoa, một ký tự viết thường, một chữ số và một ký tự đặc biệt(@#$%^&*)"
     )
     .required('Bắt buộc'),
+  account_type: yup
+      .string('Nhập loại tài khoản')
+      .required('Bắt buộc'),
   passwordConfirm: yup
     .string('Xác nhận mật khẫu')
     .required('Bắt buộc')
@@ -48,8 +52,11 @@ export default function NewAdminAccountForm({
 
   const handleSubmit = async (values) => {
     setFormStates({...formStates, isSubmitting: true});
-    console.log(values)
-    AdminUsersAPI.addAdminUser(values)
+    const submitVal = {
+      ...values,
+      email: values.username,
+    }
+    AdminUsersAPI.addUser(submitVal)
     .then(() => {
       onSuccess();
     })
@@ -72,6 +79,7 @@ export default function NewAdminAccountForm({
   const formik = useFormik({
     initialValues: {
       username: '',
+      account_type: ACCOUNT_TYPE.ADMIN,
       password: '',
       passwordConfirm: '',
     },
@@ -87,12 +95,27 @@ export default function NewAdminAccountForm({
         autoFocus
         id='username'
         name='username'
-        label='Username'
+        label='Username/Email'
         value={formik.values.username}
         onChange={formik.handleChange}
         error={Boolean(formik.errors.username)}
         helperText={formik.errors.username}
       />
+      <TextField
+        fullWidth
+        id='account_type'
+        name='account_type'
+        label='Loại tài khoản'
+        margin='dense'
+        select
+        value={formik.values.account_type}
+        onChange={formik.handleChange}
+        error={Boolean(formik.errors.account_type)}
+        helperText={formik.errors.account_type || ' '}
+      >
+        <MenuItem value={ACCOUNT_TYPE.ADMIN}>Admin</MenuItem>
+        <MenuItem value={ACCOUNT_TYPE.USER}>User</MenuItem>
+      </TextField>
       <CustomTextField
         fullWidth
         disabled={formStates.isSubmitting}

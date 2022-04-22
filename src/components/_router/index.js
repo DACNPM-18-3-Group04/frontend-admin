@@ -6,10 +6,9 @@ import NonAuthOnlyRoute from './customRoute/nonAuthOnlyRoute';
 import NotFoundPage from '../_pages/notfound';
 import SignInPage from '../_pages/signin';
 import UserInfoPage from '../_pages/userinfo';
-import UserAccountList from '../_pages/userList';
+import UserAccountList from '../_pages/userAccountList';
 import DefaultLayout from '../_layout/default';
 // import UserSingle from '../_pages/userSingle';
-// import ClassSingle from '../_pages/classSingle';
 
 // Pages
 
@@ -33,13 +32,17 @@ function Router() {
       </AuthOnlyRoute>
       <AuthOnlyRoute path='/user/:userId'>
         {/* Edit single user */}
-        {/* <UserSingle /> */}
+        <DefaultLayout>
+          {/* <UserSingle /> */}
+        </DefaultLayout>
       </AuthOnlyRoute>
       <AuthOnlyRoute exact path='/p'>
         {/* List property */}
+        <DefaultLayout></DefaultLayout>
       </AuthOnlyRoute>
       <AuthOnlyRoute path='/p/:propertyId'>
         {/* Edit single property */}
+        <DefaultLayout></DefaultLayout>
       </AuthOnlyRoute>
 
       <Route exact path='/notfound'>

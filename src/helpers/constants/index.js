@@ -20,3 +20,10 @@ export const USER_ACCOUNT_STATUS = Object.freeze({
     isClassDisabled: true,
   },
 });
+
+export const ACCOUNT_TYPE = Object.freeze({
+  ADMIN: 'A',
+  USER: 'C',
+  'A': 'Admin',
+  'C': 'User',
+});

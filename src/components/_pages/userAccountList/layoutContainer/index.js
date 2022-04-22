@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 import ErrorPage from '../../../_common/error';
 import Loader from '../../../_common/loader';
 import AdminListToolbar from '../topBar';
-import AdminListTable from '../adminTable';
+import UserListTable from '../userTable';
 
 function UserLayoutContainer({
   error, isLoaded, users, 
@@ -25,7 +25,7 @@ function UserLayoutContainer({
     return (
       <>
         <AdminListToolbar handleRefresh={handleRefresh}/>
-        <AdminListTable 
+        <UserListTable 
           userData={users}
           handleRefresh={handleRefresh}
           onUpdateSuccess={onUpdateSuccess}

@@ -9,11 +9,11 @@ import {
 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 // import HomeIcon from '@mui/icons-material/Home';
-import SchoolIcon from '@mui/icons-material/School';
+import HouseIcon from '@mui/icons-material/House';
 import PersonIcon from '@mui/icons-material/Person';
 
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+// import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+// import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 import { Link } from 'react-router-dom';
 
@@ -28,7 +28,7 @@ const navLinks = [
   // },
   {
     text: 'Quản lý BĐS',
-    icon: <SchoolIcon/>,
+    icon: <HouseIcon/>,
     path: '/p',
     childPaths: []
   },
@@ -36,18 +36,19 @@ const navLinks = [
     text: 'Quản lý tài khoản',
     icon: <PersonIcon/>,
     path: '/users',
-    childPaths: [
-      {
-        text: 'Người dùng',
-        icon: <ManageAccountsIcon/>,
-        path: '/users',
-      },
-      {
-        text: 'Admin',
-        icon: <AdminPanelSettingsIcon/>,
-        path: '/users/admin',
-      }
-    ]
+    childPaths: []
+    // childPaths: [
+    //   {
+    //     text: 'Người dùng',
+    //     icon: <ManageAccountsIcon/>,
+    //     path: '/users',
+    //   },
+    //   {
+    //     text: 'Admin',
+    //     icon: <AdminPanelSettingsIcon/>,
+    //     path: '/users/admin',
+    //   }
+    // ]
   },
 ]
 

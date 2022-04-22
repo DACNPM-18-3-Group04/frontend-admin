@@ -8,7 +8,7 @@ function NewAdminAccountDialog({open, onClose, onSuccess}) {
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Tạo tài khoản admin mới</DialogTitle>
+      <DialogTitle>Tạo tài khoản mới</DialogTitle>
       <DialogContent>
         <NewAdminAccountForm
           onSuccess={onSuccess}

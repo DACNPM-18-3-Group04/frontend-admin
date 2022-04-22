@@ -18,7 +18,7 @@ import SearchNotFound from '../../../_common/userTable/searchNotFound';
 import UserListHead from '../../../_common/userTable/userListHead';
 import UserListToolbar from '../../../_common/userTable/userListToolbar';
 import UserTableRow from './tableRow';
-import { removeSigns } from '../../../../helpers/helper/stringHelper';
+import removeSigns from '../../../../helpers/format/removeSigns';
 
 export default function AdminListTable({
   userData = [],
@@ -33,7 +33,7 @@ export default function AdminListTable({
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const isEmptyData = userData.length === 0;
-
+  // console.log(userData);
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -49,11 +49,13 @@ export default function AdminListTable({
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, userId) => {
+    const selectedIndex = selected.indexOf(userId);
     let newSelected = [];
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      // Newly selected
+      newSelected = newSelected.concat(selected, userId);
+      // Else deselect
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -129,8 +131,9 @@ export default function AdminListTable({
                 {filteredUsers
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
-                    const { id, name } = row;
-                    const isItemSelected = selected.indexOf(name) !== -1;
+                    // IMPORTANCE: EDIT SELECTED ITEM HERE
+                    const { id } = row;
+                    const isItemSelected = selected.indexOf(id) !== -1;
 
                     return (
                       <UserTableRow
@@ -179,11 +182,11 @@ export default function AdminListTable({
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'full_name', label: 'Họ tên', alignRight: false },
-  { id: 'username', label: 'Email/Username', alignRight: false },
+  { id: 'fullname', label: 'Họ tên', alignRight: false },
+  { id: 'email', label: 'Email/Username', alignRight: false },
   { id: 'status', label: 'Trạng thái', alignRight: false },
-  { id: 'last_login_at', label: 'Truy cập lần cuối', alignRight: false },
-  { id: 'created_at', label: 'Thời gian tạo', alignRight: false },
+  { id: 'account_type', label: 'Loại tài khoản', alignRight: false },
+  { id: 'createdAt', label: 'Thời gian tạo', alignRight: false },
   { id: '' }
 ];
 
@@ -205,6 +208,7 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
+// Search with 'fullname'
 function applySortFilter(array, comparator, query) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -215,7 +219,8 @@ function applySortFilter(array, comparator, query) {
   if (query) {
     return filter(
       array, 
-      (_data) => removeSigns(_data.full_name).toLowerCase().indexOf(
+      // Search with 'fullname', edit below
+      (_data) => removeSigns(_data.fullname).toLowerCase().indexOf(
         removeSigns(query).toLowerCase()) !== -1
     );
   }
