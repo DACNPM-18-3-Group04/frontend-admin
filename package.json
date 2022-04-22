@@ -30,14 +30,13 @@
     "react-toastify": "^8.0.3",
     "sass": "^1.45.1",
     "web-vitals": "^1.1.2",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "react-scripts": "4.0.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "react-scripts": "4.0.3",
-    "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-prettier-check": "^1.0.0",
     "eslint-config-react-app": "^7.0.0",
