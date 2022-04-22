@@ -1,14 +1,15 @@
 import { visuallyHidden } from '@mui/utils';
 import { Box, Checkbox, TableRow, TableCell, TableHead, TableSortLabel } from '@mui/material';
 
-export default function UserListHead({
+export default function ListHead({
   order,
   orderBy,
   rowCount,
   headLabel,
   numSelected,
   onRequestSort,
-  onSelectAllClick
+  onSelectAllClick,
+  selectAll = true,
 }) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -18,11 +19,13 @@ export default function UserListHead({
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-          />
+          {selectAll &&
+            <Checkbox
+              indeterminate={numSelected > 0 && numSelected < rowCount}
+              checked={rowCount > 0 && numSelected === rowCount}
+              onChange={onSelectAllClick}
+            />
+          }
         </TableCell>
         {headLabel.map((headCell) => (
           <TableCell

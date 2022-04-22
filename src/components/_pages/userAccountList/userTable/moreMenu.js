@@ -14,7 +14,7 @@ import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 
 // ----------------------------------------------------------------------
 
-export default function UserMoreMenu({
+export default function MoreMenu({
   userId = '',
   isDisabled = false,
   disable = false,

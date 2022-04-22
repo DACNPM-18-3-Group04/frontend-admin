@@ -12,7 +12,7 @@ import { selectUser } from '../../../../redux/slices/user';
 import { USER_ACCOUNT_STATUS, ACCOUNT_TYPE } from '../../../../helpers/constants';
 import getLocalDatetimeISOString from '../../../../helpers/utils/getLocalDatetimeISOString';
 
-import UserMoreMenu from '../../../_common/userTable/userMoreMenu';
+import MoreMenu from './moreMenu';
 
 export default function UserTableRow({
   row = {}, 
@@ -78,7 +78,7 @@ export default function UserTableRow({
       <TableCell align='left'>{getLocalDatetimeISOString(created_at)}</TableCell>
 
       <TableCell align='right'>
-        <UserMoreMenu 
+        <MoreMenu 
           userId={id}
           disable={isRowLoginInUser}
           isDisabled={statusInfo.isClassDisabled}

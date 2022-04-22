@@ -10,7 +10,7 @@ export default function Footer() {
       <Divider />
       <Container maxWidth='xl' sx={{marginY: 4}}>
         <Typography variant='subtitle1'>
-          <b>Propbook project</b>
+          <b>Project Web BĐS</b>
         </Typography>
         <Typography variant='subtitle1'>
           [[CQ]DACNPM - 18_3]

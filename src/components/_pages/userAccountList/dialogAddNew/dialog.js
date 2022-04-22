@@ -1,7 +1,7 @@
 import { Dialog, DialogTitle, DialogContent, Button, } from "@mui/material";
 import NewAdminAccountForm from "./addNewForm";
 
-function NewAdminAccountDialog({open, onClose, onSuccess}) {
+function AddDialog({open, onClose, onSuccess}) {
   const handleClose = () => {
     onClose();
   }
@@ -21,4 +21,4 @@ function NewAdminAccountDialog({open, onClose, onSuccess}) {
   )
 }
 
-export default NewAdminAccountDialog;
+export default AddDialog;

@@ -1,8 +1,8 @@
 import {Toolbar, Container, IconButton, Typography, Divider, Stack} from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import NewAdminUserModal from '../dialogAddNew';
+import AddModal from '../dialogAddNew';
 
-function AdminListToolbar({
+export default function Topbar({
   handleRefresh = () => {}
 }) {
   return (
@@ -18,7 +18,7 @@ function AdminListToolbar({
             component='div'
             sx={{ flexGrow: 1}}
           >
-            Danh sách TK Admin
+            Danh sách TK
           </Typography>
           <Stack direction='row' spacing={1}>
             <IconButton
@@ -27,7 +27,7 @@ function AdminListToolbar({
             >
               <RefreshIcon/>
             </IconButton>
-            <NewAdminUserModal
+            <AddModal
               onSuccess={handleRefresh}
             />
           </Stack>
@@ -37,5 +37,3 @@ function AdminListToolbar({
     </Container>
   )
 }
-
-export default AdminListToolbar;

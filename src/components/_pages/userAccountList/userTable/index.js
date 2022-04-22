@@ -13,10 +13,9 @@ import { filter } from 'lodash';
 import { toast } from 'react-toastify';
 import AdminUsersAPI from '../../../../helpers/api/admin/users';
 
-import SearchNotFound from '../../../_common/userTable/searchNotFound';
-
-import UserListHead from '../../../_common/userTable/userListHead';
-import UserListToolbar from '../../../_common/userTable/userListToolbar';
+import SearchNotFound from '../../../_common/table/searchNotFound';
+import ListHead from '../../../_common/table/listHead';
+import ListToolbar from '../../../_common/table/listToolbar';
 import UserTableRow from './tableRow';
 import removeSigns from '../../../../helpers/format/removeSigns';
 
@@ -42,7 +41,8 @@ export default function AdminListTable({
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = userData.map((n) => n.name);
+      const newSelecteds = userData.map((item) => item.id)
+      // .filter((id) => id !== loginInUser.id);
       setSelected(newSelecteds);
       return;
     }
@@ -110,7 +110,7 @@ export default function AdminListTable({
 
   return (
         <Card>
-          <UserListToolbar
+          <ListToolbar
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
@@ -118,7 +118,7 @@ export default function AdminListTable({
 
           <TableContainer>
             <Table stickyHeader>
-              <UserListHead
+              <ListHead
                 order={order}
                 orderBy={orderBy}
                 headLabel={TABLE_HEAD}
@@ -126,6 +126,7 @@ export default function AdminListTable({
                 numSelected={selected.length}
                 onRequestSort={handleRequestSort}
                 onSelectAllClick={handleSelectAllClick}
+                selectAll={false}
               />
               <TableBody>
                 {filteredUsers
