@@ -16,7 +16,7 @@ export const USER_ACCOUNT_STATUS = Object.freeze({
   },
   D: {
     color: 'error',
-    text: 'Bị Lock',
+    text: 'Đã vô hiệu',
     isClassDisabled: true,
   },
 });

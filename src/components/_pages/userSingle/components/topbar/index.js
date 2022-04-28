@@ -27,11 +27,12 @@ function UserSingleToolbar({
   handleRefresh = () => {},
   onUpdateSuccess = () => {},
 }) {
-  const isUserAdmin = userInfo.user_type === 'A';
+  const fullname = userInfo.fullname || '';
+  const isUserAdmin = userInfo.account_type === 'A';
   let prevLink = {};
   if (isUserAdmin) {
     prevLink = {
-      path: '/users/admin',
+      path: '/users',
       text: 'Quản lý TK Admin',
     };
   } else {
@@ -40,7 +41,7 @@ function UserSingleToolbar({
       text: 'Quản lý TK người dùng',
     };
   }
-  console.log(userInfo);
+
   return (
     <Container maxWidth='xl' component='div' disableGutters>
       <Toolbar>
@@ -57,7 +58,7 @@ function UserSingleToolbar({
                 </LinkRouter>
               </Breadcrumbs>
               <Typography variant='subtitle1' component='div'>
-                <b>/ {userInfo.full_name}</b>
+                <b>/ {fullname}</b>
               </Typography>
             </AlignCenter>
           </Grid>

@@ -10,25 +10,21 @@ export const fetchAll = async () => {
 
 export const fetchUserById = async (userId) => {
   const config = getAuthConfig();
-  const endpoint = '/manage';
-  return api.get(`${baseURL}${endpoint}/${userId}`, config);
+  return api.get(`${baseURL}/${userId}`, config);
 };
 
-export const editUser = async (id, newUserInfo) => {
+export const editUser = async (userId, newUserInfo) => {
   const config = getAuthConfig();
-  const endpoint = '/update';
-  return api.post(`${baseURL}${endpoint}/${id}`, newUserInfo, config);
+  return api.put(`${baseURL}/${userId}`, newUserInfo, config);
 };
 
-export const resetPassword = async (id, newPasswordInfo) => {
+export const resetPassword = async (userId, newPasswordInfo) => {
   const config = getAuthConfig();
-  const endpoint = '/update';
   const data = {
-    user_id: id,
-    ...newPasswordInfo,
+    newPassword: newPasswordInfo.password,
   };
 
-  return api.post(`${baseURL}${endpoint}`, data, config);
+  return api.put(`${baseURL}/${userId}`, data, config);
 };
 
 export const addUser = async (newUserInfo) => {
