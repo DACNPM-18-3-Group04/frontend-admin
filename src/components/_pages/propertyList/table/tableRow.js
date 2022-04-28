@@ -7,8 +7,6 @@ import {
   Typography,
   Chip,
 } from '@mui/material';
-import { useSelector } from 'react-redux';
-import { selectUser } from '../../../../redux/slices/user';
 import {
   USER_ACCOUNT_STATUS,
   ACCOUNT_TYPE,
@@ -37,10 +35,6 @@ export default function ListTableRow({
     statusInfo = USER_ACCOUNT_STATUS['A'];
   }
 
-  // Disable if
-  const loginInUser = useSelector(selectUser);
-  const isRowLoginInUser = loginInUser.id === id;
-
   return (
     <TableRow
       hover
@@ -52,7 +46,6 @@ export default function ListTableRow({
     >
       <TableCell padding='checkbox'>
         <Checkbox
-          disabled={isRowLoginInUser}
           checked={selected}
           onChange={(event) => handleClick(event, id)}
         />
@@ -83,7 +76,6 @@ export default function ListTableRow({
       <TableCell align='right'>
         <MoreMenu
           dataId={id}
-          disable={isRowLoginInUser}
           isDisabled={statusInfo.isClassDisabled}
           onDeleteClick={handleDelete}
         />

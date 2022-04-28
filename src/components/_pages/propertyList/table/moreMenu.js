@@ -30,13 +30,7 @@ export default function MoreMenu({
 
   return (
     <>
-      <Tooltip
-        title={
-          disable
-            ? 'Tài khoản đăng nhập hiện tại, không chỉnh sửa được'
-            : 'Thêm'
-        }
-      >
+      <Tooltip title={disable ? 'Không chỉnh sửa được' : 'Thêm'}>
         <span>
           <IconButton
             ref={ref}
