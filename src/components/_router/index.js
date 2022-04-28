@@ -9,6 +9,7 @@ import UserInfoPage from '../_pages/userinfo';
 import UserAccountList from '../_pages/userAccountList';
 import DefaultLayout from '../_layout/default';
 import UserSingle from '../_pages/userSingle';
+import PropertyList from '../_pages/propertyList';
 
 // Pages
 
@@ -36,8 +37,7 @@ function Router() {
         </DefaultLayout>
       </AuthOnlyRoute>
       <AuthOnlyRoute exact path='/p'>
-        {/* List property */}
-        <DefaultLayout></DefaultLayout>
+        <PropertyList />
       </AuthOnlyRoute>
       <AuthOnlyRoute path='/p/:propertyId'>
         {/* Edit single property */}
