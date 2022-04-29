@@ -1,5 +1,12 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import {
+  updateProvince,
+  addDistrict,
+  updateDistrict,
+  removeDistrict,
+} from '../../../redux/slices/propertyLocation';
 
 import AdminLocationAPI from '../../../helpers/api/admin/locations';
 import LayoutContainer from './layoutContainer';
@@ -10,6 +17,7 @@ export default function LocationList() {
   const [locations, setLocations] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     loadData();
@@ -53,13 +61,19 @@ export default function LocationList() {
     if (index === -1) {
       // Not found
       return;
-    } else {
-      setLocations([
-        ...locations.slice(0, index),
-        Object.assign({}, locations[index], newData),
-        ...locations.slice(index + 1),
-      ]);
     }
+    setLocations([
+      ...locations.slice(0, index),
+      Object.assign({}, locations[index], newData),
+      ...locations.slice(index + 1),
+    ]);
+    // Update local redux data
+    dispatch(
+      updateProvince({
+        provinceId: id,
+        provinceName: newData.name,
+      }),
+    );
   };
 
   const onAddSubDataSuccess = (dataId, newData) => {
@@ -80,6 +94,16 @@ export default function LocationList() {
       Object.assign({}, locations[index], data),
       ...locations.slice(index + 1),
     ]);
+
+    // Update local redux data
+    dispatch(
+      addDistrict({
+        id: newData.id,
+        name: newData.name,
+        provinceId: dataId,
+        provinceName: data.name,
+      }),
+    );
   };
 
   const onUpdateSubDataSuccess = (dataId, subDataId, newData) => {
@@ -103,6 +127,13 @@ export default function LocationList() {
       Object.assign({}, locations[index], data),
       ...locations.slice(index + 1),
     ]);
+    // Update local redux data
+    dispatch(
+      updateDistrict({
+        id: newData.id,
+        name: newData.name,
+      }),
+    );
   };
 
   const onDeleteSubData = (dataId, subDataId) => {
@@ -125,6 +156,12 @@ export default function LocationList() {
       Object.assign({}, locations[index], data),
       ...locations.slice(index + 1),
     ]);
+    // Update local redux data
+    dispatch(
+      removeDistrict({
+        id: subDataId,
+      }),
+    );
   };
 
   const handleDeleteSubData = (dataId, subDataId) => {

@@ -8,7 +8,7 @@ import {
   Paper,
   Box,
 } from '@mui/material';
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SubDataEditForm from './editForm';
 
@@ -34,17 +34,18 @@ export default function DataSubListItem({
               alignItems='center'
               justifyContent='center'
             >
-              <Grid item xs={11}>
+              <Grid item lg={11} xs={12}>
                 <SubDataEditForm
                   data={formattedData}
                   onSuccess={onEditSuccess}
                 />
               </Grid>
-              <Grid item xs={1}>
+              <Grid item lg={1} xs={12}>
                 <Button
                   fullWidth
                   color='error'
                   variant='contained'
+                  startIcon={<DeleteIcon />}
                   onClick={() => handleDelete(formattedData.id)}
                 >
                   Xóa
