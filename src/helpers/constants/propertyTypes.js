@@ -8,6 +8,17 @@ const PropertyTypes = Object.freeze({
   LENT,
 });
 
+export const PROPERTY_TYPE = Object.freeze({
+  S: {
+    color: 'info',
+    text: 'Đăng bán',
+  },
+  L: {
+    color: 'warning',
+    text: 'Cho thuê',
+  },
+});
+
 export const getPropertyTypeName = (type) => {
   if (type === PropertyTypes.SELL) {
     return 'Đăng bán';

@@ -49,7 +49,7 @@ export default function MoreMenu({
         PaperProps={{
           sx: { width: 200, maxWidth: '100%' },
         }}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
         {isDisabled ? (
