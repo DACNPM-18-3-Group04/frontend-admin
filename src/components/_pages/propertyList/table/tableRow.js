@@ -41,7 +41,6 @@ export default function ListTableRow({
   }
   let addressDistrict = getAddressDistrict(district);
 
-  console.log(row);
   return (
     <TableRow
       hover
