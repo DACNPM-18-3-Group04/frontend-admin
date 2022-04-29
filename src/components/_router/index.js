@@ -11,6 +11,7 @@ import DefaultLayout from '../_layout/default';
 import UserSingle from '../_pages/userSingle';
 import PropertyList from '../_pages/propertyList';
 import PropertySingle from '../_pages/propertySingle';
+import LocationList from '../_pages/locationList';
 
 // Pages
 
@@ -27,6 +28,10 @@ function Router() {
         <DefaultLayout>
           <UserInfoPage />
         </DefaultLayout>
+      </AuthOnlyRoute>
+
+      <AuthOnlyRoute exact path='/locations'>
+        <LocationList />
       </AuthOnlyRoute>
 
       <AuthOnlyRoute exact path='/users'>

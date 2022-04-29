@@ -93,9 +93,10 @@ export default function BasicInfoEditForm({
             <Autocomplete
               fullWidth
               value={formik.values.district_id}
-              onChange={(e, value) =>
-                formik.setFieldValue('district_id', '' + value.id)
-              }
+              onChange={(e, value) => {
+                if (!value) return;
+                formik.setFieldValue('district_id', '' + value.id);
+              }}
               options={districts}
               isOptionEqualToValue={(option, value) => {
                 // There are warnings, OK for now
