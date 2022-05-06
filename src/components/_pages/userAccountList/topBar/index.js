@@ -8,8 +8,14 @@ import {
 } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import AddModal from '../dialogAddNew';
+import { toast } from 'react-toastify';
 
 export default function Topbar({ handleRefresh = () => {} }) {
+  const onAddSuccess = () => {
+    toast.success('Tạo tài khoản thành công');
+    handleRefresh();
+  };
+
   return (
     <Container maxWidth='xl' component='div' disableGutters>
       <Container maxWidth='xl' disableGutters>
@@ -21,7 +27,7 @@ export default function Topbar({ handleRefresh = () => {} }) {
             <IconButton color='defaultColor' onClick={handleRefresh}>
               <RefreshIcon />
             </IconButton>
-            <AddModal onSuccess={handleRefresh} />
+            <AddModal onSuccess={onAddSuccess} />
           </Stack>
         </Toolbar>
       </Container>
