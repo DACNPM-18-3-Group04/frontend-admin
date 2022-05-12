@@ -12,6 +12,7 @@ import UserSingle from '../_pages/userSingle';
 import PropertyList from '../_pages/propertyList';
 import PropertySingle from '../_pages/propertySingle';
 import LocationList from '../_pages/locationList';
+import ReviewReport from '../_pages/reviewReport';
 
 // Pages
 
@@ -50,6 +51,10 @@ function Router() {
         <DefaultLayout>
           <PropertySingle />
         </DefaultLayout>
+      </AuthOnlyRoute>
+
+      <AuthOnlyRoute path='/review/rp'>
+        <ReviewReport />
       </AuthOnlyRoute>
 
       <Route exact path='/notfound'>
