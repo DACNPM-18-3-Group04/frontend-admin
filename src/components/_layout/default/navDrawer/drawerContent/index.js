@@ -12,6 +12,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import HouseIcon from '@mui/icons-material/House';
 import PersonIcon from '@mui/icons-material/Person';
 import PinDropIcon from '@mui/icons-material/PinDrop';
+import FlagIcon from '@mui/icons-material/Flag';
 
 // import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 // import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
@@ -55,6 +56,12 @@ const navLinks = [
     text: 'Quản lý vị trí',
     icon: <PinDropIcon />,
     path: '/locations',
+    childPaths: [],
+  },
+  {
+    text: 'Quản lý bài đánh giá',
+    icon: <FlagIcon />,
+    path: 'review/rp',
     childPaths: [],
   },
 ];
