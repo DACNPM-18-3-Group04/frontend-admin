@@ -53,7 +53,21 @@ export default function ListTableRow({
 }) {
   const { id, reason, review, status } = row;
   const { contact } = review;
-  const { property, user: reviewer } = contact;
+  let { property, user: reviewer } = contact;
+
+  if (!property) {
+    property = {
+      id: null,
+      title: '(Không có thông tin)',
+      createdAt: '',
+      user: {
+        id: null,
+        avatar: '',
+        fullname: '',
+      },
+    };
+  }
+
   const { user: author } = property;
 
   return (
@@ -141,9 +155,13 @@ export default function ListTableRow({
             <Typography variant='caption' noWrap>
               {property.title}
             </Typography>
-            <Typography fontSize='0.8rem' noWrap>
-              {dayjs(property.createdAt).fromNow()}
-            </Typography>
+            {property.createdAt === '' ? (
+              ''
+            ) : (
+              <Typography fontSize='0.8rem' noWrap>
+                {dayjs(property.createdAt).fromNow()}
+              </Typography>
+            )}
           </Stack>
         </Stack>
       </TableCell>

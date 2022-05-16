@@ -16,15 +16,16 @@ export default function ReviewReport() {
   }, []);
 
   const loadData = () => {
+    setIsLoaded(false);
     setRvReports([]);
-    let isMounted = true;
+    // let isMounted = true; // Unneeded
     setError(null);
     getReviewReportList()
       .then((res) => {
-        if (isMounted) {
-          setRvReports(res.data.reports);
-          setIsLoaded(true);
-        }
+        // if (isMounted) {
+        setRvReports(res.data.data.reports);
+        setIsLoaded(true);
+        // }
       })
       .catch((err) => {
         setError(formatErrorResponse(err));
@@ -44,7 +45,8 @@ export default function ReviewReport() {
     } else {
       setRvReports([
         ...rv.slice(0, index),
-        Object.assign({}, rv[index], newData),
+        // Processed review, don't display anymore
+        // Object.assign({}, rv[index], newData),
         ...rv.slice(index + 1),
       ]);
     }
