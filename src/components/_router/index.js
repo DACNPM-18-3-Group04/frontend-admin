@@ -13,6 +13,7 @@ import PropertyList from '../_pages/propertyList';
 import PropertySingle from '../_pages/propertySingle';
 import LocationList from '../_pages/locationList';
 import ReviewReport from '../_pages/reviewReport';
+import SubServiceLocationList from '../_pages/service.locationList';
 
 // Pages
 
@@ -33,6 +34,9 @@ function Router() {
 
       <AuthOnlyRoute exact path='/locations'>
         <LocationList />
+      </AuthOnlyRoute>
+      <AuthOnlyRoute exact path='/services/locations'>
+        <SubServiceLocationList />
       </AuthOnlyRoute>
 
       <AuthOnlyRoute exact path='/users'>

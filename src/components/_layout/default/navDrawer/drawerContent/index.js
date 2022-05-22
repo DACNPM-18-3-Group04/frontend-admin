@@ -61,7 +61,13 @@ const navLinks = [
   {
     text: 'Quản lý bài đánh giá',
     icon: <FlagIcon />,
-    path: 'review/rp',
+    path: '/review/rp',
+    childPaths: [],
+  },
+  {
+    text: 'Quản lý vị trí (MS)',
+    icon: <PinDropIcon />,
+    path: '/services/locations',
     childPaths: [],
   },
 ];
